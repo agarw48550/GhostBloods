@@ -1,8 +1,10 @@
-// Crucix Configuration — all settings with env var overrides
+// GHOSTBLOODS Intelligence Dashboard
+// GhostBloods Configuration — all settings with env var overrides
 
 import './apis/utils/env.mjs'; // Load .env first
 
 export default {
+  name: 'GhostBloods',
   port: parseInt(process.env.PORT) || 3117,
   refreshIntervalMinutes: parseInt(process.env.REFRESH_INTERVAL_MINUTES) || 15,
 

@@ -35,13 +35,23 @@ No cloud. No telemetry. No subscriptions. Just `node server.mjs` and you're runn
 
 ---
 
-## Why This Exists
+# GHOSTBLOODS
 
-Most of the world's real-time intelligence — satellite imagery, radiation levels, conflict events, economic indicators, flight tracking, maritime activity — is publicly available. It's just scattered across dozens of government APIs, research institutions, and open data feeds that nobody has time to check individually.
+> **GhostBloods** is a free, local-first macOS desktop intelligence dashboard that aggregates geopolitical conflict and tech news into a real-time 3D globe map.
 
-Crucix brings it all into one place. Not behind a paywall, not locked in an enterprise platform, not requiring a security clearance. Just open data, aggregated and cross-correlated on your own machine, updated every 15 minutes.
+Inspired by Brandon Sanderson's Cosmere and the Crucix engine.
 
-It was built for anyone who wants to understand what's actually happening in the world right now — researchers, journalists, traders, OSINT analysts, or just curious people who believe access to information shouldn't depend on your budget.
+## Overview
+
+GhostBloods runs as a lightweight macOS menu-bar application. It features two operational modes:
+
+1. **Dashboard Mode**: Full foreground experience with a 3D globe, SSE data streaming, and 27 OSINT sources.
+2. **Notifier Mode**: Ultra-lightweight background mode that performs infrequent "lite sweeps" (GDELT + RSS) and sends native macOS notifications.
+
+---
+
+### [Desktop Documentation](docs/desktop.md)
+See the desktop guide for installation, usage, and background mode verification.
 
 ---
 
