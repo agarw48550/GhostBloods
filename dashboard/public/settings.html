@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GhostBloods — Settings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#020408;--panel:rgba(6,14,22,0.92);
+  --border:rgba(100,240,200,0.12);--border-bright:rgba(100,240,200,0.3);
+  --text:#e8f4f0;--dim:#6a8a82;--accent:#64f0c8;--accent2:#44ccff;
+  --mono:'IBM Plex Mono',monospace;--sans:'Space Grotesk',sans-serif;
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden}
+.container{max-width:480px;margin:0 auto;padding:24px 20px}
+h1{font-family:var(--mono);font-size:14px;letter-spacing:0.12em;color:var(--accent);margin-bottom:20px;text-transform:uppercase}
+.section{border:1px solid var(--border);background:var(--panel);padding:16px;margin-bottom:14px}
+.section h2{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
+
+label{display:block;font-size:12px;color:var(--dim);margin-bottom:4px;font-family:var(--mono);letter-spacing:0.05em}
+input[type="range"]{width:100%;accent-color:var(--accent);margin:4px 0 8px}
+.range-val{font-family:var(--mono);font-size:13px;color:var(--accent);float:right}
+select,input[type="text"],input[type="number"],textarea{
+  width:100%;padding:8px 10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);
+  color:var(--text);font-family:var(--mono);font-size:12px;margin-bottom:12px;outline:none;resize:vertical
+}
+select:focus,input:focus,textarea:focus{border-color:var(--accent)}
+textarea{min-height:60px;line-height:1.5}
+
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
+.toggle-row label{margin:0;flex:1}
+.toggle{position:relative;width:36px;height:20px;cursor:pointer}
+.toggle input{opacity:0;width:0;height:0}
+.toggle .slider{position:absolute;inset:0;background:rgba(255,255,255,0.1);border-radius:10px;transition:0.2s}
+.toggle .slider::before{content:'';position:absolute;width:16px;height:16px;border-radius:50%;background:var(--dim);left:2px;top:2px;transition:0.2s}
+.toggle input:checked+.slider{background:rgba(100,240,200,0.3)}
+.toggle input:checked+.slider::before{background:var(--accent);transform:translateX(16px)}
+
+.quiet-row{display:flex;gap:8px;align-items:center}
+.quiet-row input{width:80px;text-align:center}
+.quiet-row span{color:var(--dim);font-family:var(--mono);font-size:11px}
+
+.btn-save{
+  width:100%;padding:12px;background:rgba(100,240,200,0.1);border:1px solid var(--accent);
+  color:var(--accent);font-family:var(--mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;
+  cursor:pointer;transition:all 0.2s
+}
+.btn-save:hover{background:var(--accent);color:var(--bg)}
+.saved-msg{text-align:center;color:var(--accent);font-family:var(--mono);font-size:11px;margin-top:8px;opacity:0;transition:opacity 0.3s}
+.saved-msg.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>⚙ GhostBloods Settings</h1>
+
+  <div class="section">
+    <h2>Background Sweep</h2>
+    <label>Sweep Interval</label>
+    <select id="interval">
+      <option value="30">Every 30 minutes</option>
+      <option value="45" selected>Every 45 minutes</option>
+      <option value="60">Every 60 minutes</option>
+      <option value="90">Every 90 minutes</option>
+      <option value="120">Every 2 hours</option>
+    </select>
+    <label>Alert Threshold <span class="range-val" id="thresholdVal">8</span></label>
+    <input type="range" id="threshold" min="1" max="20" value="8" oninput="document.getElementById('thresholdVal').textContent=this.value">
+    <div style="font-size:10px;color:var(--dim);font-family:var(--mono)">Lower = more sensitive • Higher = fewer alerts</div>
+  </div>
+
+  <div class="section">
+    <h2>Notification Controls</h2>
+    <label>Max Notifications per Hour</label>
+    <select id="maxPerHour">
+      <option value="1">1 per hour</option>
+      <option value="2">2 per hour</option>
+      <option value="3" selected>3 per hour</option>
+      <option value="5">5 per hour</option>
+    </select>
+    <div class="toggle-row">
+      <label>Digest Mode (combine multiple alerts)</label>
+      <label class="toggle"><input type="checkbox" id="digestMode" checked><span class="slider"></span></label>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Quiet Hours</h2>
+    <div class="quiet-row">
+      <input type="number" id="quietStart" min="0" max="23" placeholder="22">
+      <span>to</span>
+      <input type="number" id="quietEnd" min="0" max="23" placeholder="7">
+      <span>(24h format, leave empty to disable)</span>
+    </div>
+    <div style="font-size:10px;color:var(--dim);font-family:var(--mono);margin-top:4px">FLASH alerts override quiet hours</div>
+  </div>
+
+  <div class="section">
+    <h2>Watchlist Keywords</h2>
+    <textarea id="watchlistKeywords" placeholder="nuclear&#10;missile&#10;invasion&#10;sanctions">nuclear
+missile
+invasion
+sanctions</textarea>
+    <label style="margin-top:4px">One keyword per line. Matches boost alert score by +5.</label>
+  </div>
+
+  <div class="section">
+    <h2>Watchlist Regions</h2>
+    <textarea id="watchlistRegions" placeholder="Ukraine&#10;Taiwan&#10;Middle East">Ukraine
+Taiwan
+Middle East
+South China Sea</textarea>
+    <label style="margin-top:4px">One region per line. Matches boost alert score by +3.</label>
+  </div>
+
+  <button class="btn-save" id="saveBtn" onclick="saveSettings()">Save Settings</button>
+  <div class="saved-msg" id="savedMsg">✓ Settings saved</div>
+</div>
+
+<script>
+  // Load settings on page load
+  async function loadSettings() {
+    try {
+      const json = await window.__TAURI__.core.invoke('cmd_get_settings');
+      const state = JSON.parse(json);
+      const s = state.settings || {};
+      document.getElementById('interval').value = s.interval_minutes || 45;
+      document.getElementById('threshold').value = s.threshold || 8;
+      document.getElementById('thresholdVal').textContent = s.threshold || 8;
+      document.getElementById('maxPerHour').value = s.max_notifications_per_hour || 3;
+      document.getElementById('digestMode').checked = s.digest_mode !== false;
+      if (s.quiet_hours_start != null) document.getElementById('quietStart').value = s.quiet_hours_start;
+      if (s.quiet_hours_end != null) document.getElementById('quietEnd').value = s.quiet_hours_end;
+      if (s.watchlist_keywords?.length) document.getElementById('watchlistKeywords').value = s.watchlist_keywords.join('\n');
+      if (s.watchlist_regions?.length) document.getElementById('watchlistRegions').value = s.watchlist_regions.join('\n');
+    } catch (e) {
+      console.log('Could not load settings:', e);
+    }
+  }
+
+  async function saveSettings() {
+    const settings = {
+      interval_minutes: parseInt(document.getElementById('interval').value),
+      threshold: parseInt(document.getElementById('threshold').value),
+      max_notifications_per_hour: parseInt(document.getElementById('maxPerHour').value),
+      digest_mode: document.getElementById('digestMode').checked,
+      quiet_hours_start: document.getElementById('quietStart').value ? parseInt(document.getElementById('quietStart').value) : null,
+      quiet_hours_end: document.getElementById('quietEnd').value ? parseInt(document.getElementById('quietEnd').value) : null,
+      watchlist_keywords: document.getElementById('watchlistKeywords').value.split('\n').map(s => s.trim()).filter(Boolean),
+      watchlist_regions: document.getElementById('watchlistRegions').value.split('\n').map(s => s.trim()).filter(Boolean),
+    };
+    try {
+      await window.__TAURI__.core.invoke('cmd_save_settings', { settingsJson: JSON.stringify(settings) });
+      const msg = document.getElementById('savedMsg');
+      msg.classList.add('show');
+      setTimeout(() => msg.classList.remove('show'), 2000);
+    } catch (e) {
+      alert('Failed to save: ' + e);
+    }
+  }
+
+  // Load on start
+  if (window.__TAURI__) {
+    loadSettings();
+  }
+</script>
+</body>
+</html>

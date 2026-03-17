@@ -1,0 +1,22 @@
+[
+  { "name": "Reuters World", "url": "https://feeds.reuters.com/reuters/worldNews" },
+  { "name": "Reuters Politics", "url": "https://feeds.reuters.com/Reuters/PoliticsNews" },
+  { "name": "AP Top News", "url": "https://rsshub.app/apnews/topics/apf-topnews" },
+  { "name": "BBC World", "url": "https://feeds.bbci.co.uk/news/world/rss.xml" },
+  { "name": "BBC Asia", "url": "https://feeds.bbci.co.uk/news/world/asia/rss.xml" },
+  { "name": "BBC Middle East", "url": "https://feeds.bbci.co.uk/news/world/middle_east/rss.xml" },
+  { "name": "Al Jazeera", "url": "https://www.aljazeera.com/xml/rss/all.xml" },
+  { "name": "NPR World", "url": "https://feeds.npr.org/1004/rss.xml" },
+  { "name": "CNBC World", "url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100727362" },
+  { "name": "Defense News", "url": "https://www.defensenews.com/arc/outboundfeeds/rss/?outputType=xml" },
+  { "name": "The War Zone", "url": "https://www.thedrive.com/the-war-zone/rss" },
+  { "name": "Foreign Affairs", "url": "https://www.foreignaffairs.com/rss.xml" },
+  { "name": "Arms Control", "url": "https://www.armscontrol.org/rss/today" },
+  { "name": "Conflict News", "url": "https://news.google.com/rss/search?q=conflict+military+war&hl=en-US&gl=US&ceid=US:en" },
+  { "name": "Geopolitics", "url": "https://news.google.com/rss/search?q=geopolitics+sanctions+diplomacy&hl=en-US&gl=US&ceid=US:en" },
+  { "name": "Nuclear Threat", "url": "https://news.google.com/rss/search?q=nuclear+missile+ICBM&hl=en-US&gl=US&ceid=US:en" },
+  { "name": "SIPRI", "url": "https://www.sipri.org/rss.xml" },
+  { "name": "Crisis Group", "url": "https://www.crisisgroup.org/latest-updates/rss" },
+  { "name": "Nikkei Asia", "url": "https://asia.nikkei.com/rss" },
+  { "name": "SCMP World", "url": "https://www.scmp.com/rss/91/feed" }
+]
